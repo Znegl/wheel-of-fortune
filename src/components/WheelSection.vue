@@ -1,7 +1,13 @@
 <template>
   <g>
     <path :fill="data.color" :d="path"/>
-    <text :x="wheelCenter + centerOffset + (wheelRadius - centerOffset) / 2" :y="wheelCenter" :transform="`rotate(${-textAngle} ${wheelCenter} ${wheelCenter})`" text-anchor="middle">
+    <text
+      :x="wheelCenter + centerOffset + (wheelRadius - centerOffset) / 2"
+      :y="wheelCenter"
+      :transform="`rotate(${-textAngle} ${wheelCenter} ${wheelCenter})`"
+      text-anchor="middle"
+      dominant-baseline="middle"
+    >
       {{data.title}}
     </text>
   </g>
@@ -63,7 +69,7 @@
         const x = Math.cos(radians) * radius + this.wheelCenter
         const y = this.wheelCenter - Math.sin(radians) * radius
 
-        return {x ,y}
+        return {x, y}
       },
       degreesToRadians(degrees) {
         return degrees * Math.PI / 180
@@ -76,6 +82,6 @@
   text {
     font-family: Bubblegum Sans, sans-serif;
     font-weight: bold;
-    font-size: 4px;
+    font-size: 6px;
   }
 </style>
