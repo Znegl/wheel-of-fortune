@@ -1,13 +1,14 @@
 <template>
-  <svg viewBox="0 0 42 42" class="fortune-wheel">
+  <svg viewBox="0 0 100 100" class="fortune-wheel">
     <WheelSection
       v-for="(section, index) in sections"
       :key="section.id"
       :data="section"
       :start-angle="getStartAngle(index)"
       :end-angle="getEndAngle(index)"
-      :wheel-center="21"
-      :wheel-radius="21"
+      :center-offset="10"
+      :wheel-center="50"
+      :wheel-radius="50"
     />
   </svg>
 </template>

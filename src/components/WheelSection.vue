@@ -1,8 +1,8 @@
 <template>
   <g>
     <path :fill="data.color" :d="path"/>
-    <text :x="wheelCenter" :y="wheelCenter" :transform="`rotate(${textAngle} ${wheelCenter} ${wheelCenter})`">
-      {{data.title}} ({{startAngle}} - {{endAngle}})
+    <text :x="wheelCenter + centerOffset + (wheelRadius - centerOffset) / 2" :y="wheelCenter" :transform="`rotate(${-textAngle} ${wheelCenter} ${wheelCenter})`" text-anchor="middle">
+      {{data.title}}
     </text>
   </g>
 </template>
@@ -23,6 +23,10 @@
         type: Number,
         required: true
       },
+      centerOffset: {
+        type: Number,
+        required: true
+      },
       wheelCenter: {
         type: Number,
         required: true
@@ -34,13 +38,19 @@
     },
     computed: {
       path() {
-        const startCoordinate = this.angleToCoordinate(this.startAngle)
-        const endCoordinate = this.angleToCoordinate(this.endAngle)
+        const innerStartCoordinate = this.angleToCoordinate(this.startAngle, this.centerOffset)
+        const innerEndCoordinate = this.angleToCoordinate(this.endAngle, this.centerOffset)
+
+        const outerStartCoordinate = this.angleToCoordinate(this.startAngle, this.wheelRadius)
+        const outerEndCoordinate = this.angleToCoordinate(this.endAngle, this.wheelRadius)
+
         return [
-          `M${this.wheelCenter} ${this.wheelCenter}`,
-          `L${startCoordinate.x} ${startCoordinate.y}`,
-          `L${endCoordinate.x} ${endCoordinate.y}`,
-          `L${this.wheelCenter} ${this.wheelCenter}`,
+          `M${innerStartCoordinate.x} ${innerStartCoordinate.y}`,
+          `L${outerStartCoordinate.x} ${outerStartCoordinate.y}`,
+          `A${this.wheelRadius} ${this.wheelRadius} 0 0 0 ${outerEndCoordinate.x} ${outerEndCoordinate.y}`,
+          `L${outerEndCoordinate.x} ${outerEndCoordinate.y}`,
+          `L${innerEndCoordinate.x} ${innerEndCoordinate.y}`,
+          `A${this.centerOffset} ${this.centerOffset} 0 0 1 ${innerStartCoordinate.x} ${innerStartCoordinate.y}`,
         ].join(' ')
       },
       textAngle() {
@@ -48,10 +58,10 @@
       }
     },
     methods: {
-      angleToCoordinate(angle) {
-        const radians = this.degreesToRadians(angle)
-        const x = Math.cos(radians) * this.wheelRadius + this.wheelCenter
-        const y = this.wheelCenter - Math.sin(radians) * this.wheelRadius
+      angleToCoordinate(angle, radius) {
+        const radians = this.degreesToRadians(angle, radius)
+        const x = Math.cos(radians) * radius + this.wheelCenter
+        const y = this.wheelCenter - Math.sin(radians) * radius
 
         return {x ,y}
       },
@@ -64,7 +74,8 @@
 
 <style scoped>
   text {
-    font-size: 3px;
-    fill: white;
+    font-family: Bubblegum Sans, sans-serif;
+    font-weight: bold;
+    font-size: 4px;
   }
 </style>
