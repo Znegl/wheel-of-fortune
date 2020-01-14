@@ -17,18 +17,48 @@
         sections: [
           {
             id: 1,
-            title: '100',
-            color: 'tomato'
+            title: 'Alle vinder 🥳',
+            color: 'bisque'
           },
           {
             id: 2,
-            title: '200',
-            color: 'khaki'
+            title: 'Blå',
+            color: 'cadetblue'
           },
           {
             id: 3,
-            title: '300',
-            color: 'darkseagreen'
+            title: 'Fri bar',
+            color: 'orange'
+          },
+          {
+            id: 4,
+            title: 'Pink',
+            color: 'crimson'
+          },
+          {
+            id: 5,
+            title: 'Omtur',
+            color: 'darkgray'
+          },
+          {
+            id: 6,
+            title: 'Grøn',
+            color: 'darkolivegreen'
+          },
+          {
+            id: 7,
+            title: 'Orange',
+            color: 'orangered'
+          },
+          {
+            id: 8,
+            title: 'Alle taber 😢',
+            color: 'darkslategray'
+          },
+          {
+            id: 9,
+            title: 'Rød',
+            color: 'darkred'
           }
         ]
       }
