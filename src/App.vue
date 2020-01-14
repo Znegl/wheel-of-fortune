@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <FortuneWheel :sections="sections"/>
+    <div class="wheel-wrapper">
+      <div class="arrow"></div>
+      <FortuneWheel :sections="sections" :rotate="rotate" />
+    </div>
   </div>
 </template>
 
@@ -14,6 +17,7 @@
     },
     data() {
       return {
+        rotate: true,
         sections: [
           {
             id: 1,
@@ -62,6 +66,11 @@
           }
         ]
       }
+    },
+    mounted() {
+      document.body.addEventListener('keydown', () => {
+        this.rotate = !this.rotate
+      })
     }
   }
 </script>
@@ -71,6 +80,7 @@
     padding: 0;
     margin: 0;
     background: black;
+    overflow: hidden;
   }
 
   #app {
@@ -82,5 +92,18 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+  }
+  .wheel-wrapper {
+    position: relative;
+  }
+  .arrow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -25%) scaleX(.5);
+    border-color: white transparent transparent transparent;
+    border-width: 5vmin;
+    border-style: solid;
+    z-index: 1;
   }
 </style>
