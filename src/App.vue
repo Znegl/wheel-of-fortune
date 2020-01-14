@@ -1,28 +1,49 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <FortuneWheel :sections="sections" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import FortuneWheel from "./components/FortuneWheel";
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    FortuneWheel
+  },
+  data() {
+    return {
+      sections: [
+        {
+          id: 1,
+          title: '100',
+          color: 'tomato'
+        },
+        {
+          id: 2,
+          title: '200',
+          color: 'khaki'
+        },
+        {
+          id: 3,
+          title: '300',
+          color: 'darkseagreen'
+        }
+      ]
+    }
   }
 }
 </script>
 
 <style>
+  body {
+    background: black;
+  }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
