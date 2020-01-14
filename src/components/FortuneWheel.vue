@@ -1,5 +1,5 @@
 <template>
-  <svg viewBox="0 0 42 42">
+  <svg viewBox="0 0 42 42" class="fortune-wheel">
     <WheelSection
       v-for="(section, index) in sections"
       :key="section.id"
@@ -39,3 +39,10 @@
     }
   }
 </script>
+
+<style scoped>
+  .fortune-wheel {
+    display: block;
+    width: 50vmin;
+  }
+</style>
