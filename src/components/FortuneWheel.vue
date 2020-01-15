@@ -38,7 +38,9 @@
       return {
         speed: 0,
         accelerationSpeed: 0.2,
-        brakeSpeed: 0.025,
+        brakeSpeed: 0.015,
+        minBrakeSpeed: 0.015,
+        maxBrakeSpeed: 0.035,
         maxSpeed: 3,
         isStarting: false,
         isStopping: false,
@@ -75,6 +77,12 @@
       },
       getEndAngle(index) {
         return 360 / this.totalSections * (index + 1)
+      }
+    },
+    watch: {
+      rotate() {
+        const brakeSpeedDiff = this.maxBrakeSpeed - this.minBrakeSpeed
+        this.brakeSpeed = Math.random() * brakeSpeedDiff + this.minBrakeSpeed
       }
     }
   }
